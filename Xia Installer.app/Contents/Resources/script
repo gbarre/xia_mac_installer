@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#set -x
+echo "Début de l'installation"
+CIBLE="/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions"
+
+# On vérifie la présence du dossier $CIBLE qui signifie qu'Inkscape est bien installé
+if [ -d $CIBLE ]; then
+    # Inkscape Version
+    inkscapeVersion=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" /Applications/Inkscape.app/Contents/Info.plist | cut -c1-4)
+
+    if [[ $inkscapeVersion == "0.91" ]]; then
+        echo "Inkscape 0.91 a été détecté sur votre machine, nous procédons à l'installation du plugin Xia..."
+        echo "Copie des fichiers en cours..."
+        cp -r ./files/* "$CIBLE"
+        echo "Copie des fichiers terminée !"
+        echo "Fin de l'installation."
+    else
+        # Pour le moment, on alerte que seule la version 0.91.alphabetagammatrucchose permet d'utiliser l'extension Xia
+        echo "Votre version d'Inkscape n'est pas à jour."
+        echo "Vous trouverez la dernière version ici :"
+        echo "https://inkscape.org/fr/telecharger/"
+        echo "Installation annulée."
+    fi
+else
+    echo "Inkscape est nécessaire pour pouvoir utiliser Xia."
+    echo "Vous pouvez le télécharger ici :"
+    echo "https://inkscape.org/fr/telecharger/"
+    echo "Installation annulée."
+fi
