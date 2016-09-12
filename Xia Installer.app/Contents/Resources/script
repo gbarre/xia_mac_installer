@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+#set -x
 echo "Début de l'installation"
 CIBLE="/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions"
 
