@@ -21,6 +21,7 @@ if [ -d $CIBLE ]; then
 	osascript -e "do shell script \"$PWD/remove_old_xia.bash\" with administrator privileges"
 
         echo "Fin de l'installation."
+	echo "L'extension Xia pour Inkscape est à présent disponible dans \"Extension > Export\""
     else
         # Pour le moment, on alerte que seule la version 0.91.alphabetagammatrucchose permet d'utiliser l'extension Xia
         echo "Votre version d'Inkscape n'est pas à jour."
