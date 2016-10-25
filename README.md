@@ -6,6 +6,7 @@
 5. Lancer le script update_sources.bash 
 
 Ce script va faire un `git pull` pour récupérer les sources de Xia qu'il va recopier dans le dossier Xia_Installer.app/Contents/Resources/files/
+
 Si une archive d'un installeur est déjà présente sur la machine, le script va la renomer et créer une nouvelle archive.
 
 
