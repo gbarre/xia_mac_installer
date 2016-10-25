@@ -1,7 +1,8 @@
 #!/bin/bash
 
-SOURCE="/Users/guillaume/Documents/xia/xia"
-INSTALLER="/Users/guillaume/Documents/xia/xia_mac_installer"
+HOME="/Users/guillaume/Documents/xia"
+SOURCE="$HOME/xia"
+INSTALLER="$HOME/xia_mac_installer"
 FILES="$INSTALLER/Xia_Installer.app/Contents/Resources/files"
 
 if [ -d $SOURCE ]; then
