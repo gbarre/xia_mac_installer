@@ -17,8 +17,7 @@
 # See the README file for information on usage and redistribution.
 #
 
-import warnings
-from PIL import Image
+from . import Image
 
 
 class HDC:
@@ -27,6 +26,7 @@ class HDC:
     :py:meth:`~PIL.ImageWin.Dib.draw` and :py:meth:`~PIL.ImageWin.Dib.expose`
     methods.
     """
+
     def __init__(self, dc):
         self.dc = dc
 
@@ -40,6 +40,7 @@ class HWND:
     :py:meth:`~PIL.ImageWin.Dib.draw` and :py:meth:`~PIL.ImageWin.Dib.expose`
     methods, instead of a DC.
     """
+
     def __init__(self, wnd):
         self.wnd = wnd
 
@@ -155,8 +156,9 @@ class Dib:
                    If the mode does not match, the image is converted to the
                    mode of the bitmap image.
         :param box: A 4-tuple defining the left, upper, right, and
-                    lower pixel coordinate.  If None is given instead of a
-                    tuple, all of the image is assumed.
+                    lower pixel coordinate.  See :ref:`coordinate-system`. If
+                    None is given instead of a tuple, all of the image is
+                    assumed.
         """
         im.load()
         if self.mode != im.mode:
@@ -183,35 +185,14 @@ class Dib:
         """
         return self.image.tobytes()
 
-    ##
-    # Deprecated aliases to frombytes & tobytes.
-
-    def fromstring(self, *args, **kw):
-        warnings.warn(
-            'fromstring() is deprecated. Please call frombytes() instead.',
-            DeprecationWarning,
-            stacklevel=2
-        )
-        return self.frombytes(*args, **kw)
-
-    def tostring(self):
-        warnings.warn(
-            'tostring() is deprecated. Please call tobytes() instead.',
-            DeprecationWarning,
-            stacklevel=2
-        )
-        return self.tobytes()
-
-
-##
-# Create a Window with the given title size.
 
 class Window:
+    """Create a Window with the given title size."""
 
     def __init__(self, title="PIL", width=None, height=None):
         self.hwnd = Image.core.createwindow(
             title, self.__dispatcher, width or 0, height or 0
-            )
+        )
 
     def __dispatcher(self, action, *args):
         return getattr(self, "ui_handle_" + action)(*args)
@@ -235,17 +216,15 @@ class Window:
         Image.core.eventloop()
 
 
-##
-# Create an image window which displays the given image.
-
 class ImageWindow(Window):
+    """Create an image window which displays the given image."""
 
     def __init__(self, image, title="PIL"):
         if not isinstance(image, Dib):
             image = Dib(image)
         self.image = image
         width, height = image.size
-        Window.__init__(self, title, width=width, height=height)
+        super().__init__(title, width=width, height=height)
 
     def ui_handle_repair(self, dc, x0, y0, x1, y1):
         self.image.draw(dc, (x0, y0, x1, y1))
