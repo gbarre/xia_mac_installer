@@ -1,8 +1,8 @@
 #!/bin/bash
 
-HOME="/Users/guillaume/Documents/xia"
-SOURCE="$HOME/xia"
-INSTALLER="$HOME/xia_mac_installer"
+GIT="$HOME/git"
+SOURCE="$GIT/xia"
+INSTALLER="$GIT/xia_mac_installer"
 FILES="$INSTALLER/Xia_Installer.app/Contents/Resources/files"
 
 if [ -d $SOURCE ]; then

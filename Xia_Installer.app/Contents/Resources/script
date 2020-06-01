@@ -8,9 +8,9 @@ CIBLE="/Applications/Inkscape.app/Contents/Resources/share/inkscape/extensions"
 # On vérifie la présence du dossier $CIBLE qui signifie qu'Inkscape est bien installé
 if [ -d $CIBLE ]; then
     # Inkscape Version
-    inkscapeVersion=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" /Applications/Inkscape.app/Contents/Info.plist | cut -c1-4)
+    inkscapeVersion=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" /Applications/Inkscape.app/Contents/Info.plist | cut -c1-3)
 
-    if (( $(echo "$inkscapeVersion >= 0.91" | bc -l) )); then
+    if [[ "$inkscapeVersion" == "0.9" || $(echo "$inkscapeVersion >= 1.0" | bc -l) ]]; then
         echo "Inkscape $inkscapeVersion a été détecté sur votre machine, nous procédons à l'installation du plugin Xia..."
         echo "Copie des fichiers en cours..."
         cp -r ./files/* "$CIBLE"

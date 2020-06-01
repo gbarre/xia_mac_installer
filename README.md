@@ -1,12 +1,20 @@
 # Procédure de mise à jour de l'installeur pour macos
-1. Cloner le dépôt de Xia : https://github.com/pfautrero/xia.git
-2. Cloner ce dépôt dans le même dossier que le dépôt Xia (vous devez avoir les dossiers xia et xia_mac_installer dans le même dossier)
-3. Aller dans le dossier `xia_mac_installer`
-4. Mettre à jour la variable `$HOME` du script `update_sources.bash`
-5. Lancer le script update_sources.bash 
 
-Ce script va faire un `git pull` pour récupérer les sources de Xia qu'il va recopier dans le dossier Xia_Installer.app/Contents/Resources/files/
+On va travailler dans le dossier `$HOME/git` où l'on va :
+
+1. Cloner le dépôt de Xia sur la bonne branche.
+2. Cloner le repo de l'installeur.
+3. Aller dans le dossier `xia_mac_installer` et lancer le script `update_sources.bash`.
+
+Ce script va faire un `git pull` pour récupérer les sources de Xia qu'il va recopier dans le dossier `Xia_Installer.app/Contents/Resources/files/`
 
 Si une archive d'un installeur est déjà présente sur la machine, le script va la renomer et créer une nouvelle archive.
 
-
+Voici les lignes de commandes à saisir :
+```bash
+cd $HOME/git
+git clone --single-branch --branch XIA_30 git@github.com:pfautrero/xia.git
+git clone git@github.com:gbarre/xia_mac_installer.git
+cd xia_mac_installer
+./update_sources.bash
+```
